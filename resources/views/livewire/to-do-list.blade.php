@@ -14,8 +14,8 @@
     <p class="text-center text-muted mb-3"> you have to <a href="{{route('login')}}" class="text-black "><b>login</b></a> to add tasks </p>
     <div class="row">
         <div class="input-group">
-            <input type="text" @if(Auth::user()) wire:keydown.enter="addTask({{Auth::user()->id}})"  @endif class="form-control py-2 shadow-none @error('taskTitle') is-invalid @enderror"
-                   placeholder="What needs to be done?" @if(!Auth::user()) readonly @endif wire:model="taskTitle">
+            <input type="text" required @if(Auth::user()) wire:keydown.enter="addTask({{Auth::user()->id}})"  @endif class="form-control py-2 shadow-none @error('taskTitle') is-invalid @enderror"
+                   placeholder="What needs to be done?" @if(!Auth::user()) readonly @endif wire:model="taskTitle" >
             <button class="btn btn-outline-secondary " @if(Auth::user())  wire:click="addTask({{Auth::user()->id}})" @endif> Add</button>
             @error('taskTitle')
             <div class="invalid-feedback">

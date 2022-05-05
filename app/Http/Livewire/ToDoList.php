@@ -23,8 +23,7 @@ class ToDoList extends Component
     }
 
     public function addTask($id){
-        //$user = User::findOrFail($id)->first()->get();
-        //$this->validate('taskTitle');
+        $this->validateOnly('taskTitle');
 
         if (Auth::user()){
             Task::create([
@@ -36,9 +35,9 @@ class ToDoList extends Component
 
     }
     public function deleteTask(Task $task){
-        if (Auth::user()->id == $task->user->id){
+        if (Auth::user()->id == $task->user->id OR Auth::user()->isAdmin()  ){
             $task->delete();
-            Session::flash('todo_mess', 'Allright '. Auth::user()->name . ', your task was deleted');
+            Session::flash('todo_mess', 'Allright '. Auth::user()->name . ', this task was deleted');
         }else{
             Session::flash('todo_mess', 'Sorry, you can only delete you own tasks ' . Auth::user()->name );
 
@@ -50,8 +49,7 @@ class ToDoList extends Component
             foreach ($tasks as $task){
                 $task->delete();
             }
-
-            Session::flash('todo_mess', 'Allright Admin '. Auth::user()->name . ' you have deleted everyones tasks ');
+            Session::flash('todo_mess', 'Allright Admin '. Auth::user()->name . ' you have deleted everyones tasks, hope you are proud of yourself');
         }else{
             Session::flash('todo_mess', 'Sorry, '. Auth::user()->name .' only the Administrator of this page can delete everything'  );
 

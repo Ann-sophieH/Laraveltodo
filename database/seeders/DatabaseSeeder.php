@@ -16,10 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
-            //RDM
 
             UsersTableSeeder::class,
-RolesTableSeeder::class,
+            RolesTableSeeder::class,
             ]);
     }
 }
