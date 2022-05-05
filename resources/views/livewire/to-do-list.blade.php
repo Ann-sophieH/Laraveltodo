@@ -34,7 +34,7 @@
 
                     <div class="col-3 justify-between">
                         <span class="">  {{$task->user->name}} </span>
-                        <button class="btn " wire:click="deleteTask({{$task}})" @if(!Auth::user() OR $task->deleted_at != null) disabled @endif><i class="bi bi-x-circle text-danger"></i></button>
+                        <button class="btn shadow-none" wire:click="deleteTask({{$task}})" @if(!Auth::user() ) disabled @endif><i class="bi bi-x-circle text-danger"></i></button>
 
                     </div>
 
@@ -42,7 +42,9 @@
             @endforeach
 
         </ol>
+        @if(Auth::user())
         <button class="btn btn-outline-danger w-25 mx-auto my-5" wire:click="deleteAllTasks()"> DELETE ALL TASKS</button>
+        @endif
     </div>
 
 

@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
     public function isAdmin(){
         foreach ($this->roles as $role){
-            if($role->name == 'administrator' && $this->is_active == 1){
+            if($role->name == 'administrator' ){
                 return true;
             }
         }
